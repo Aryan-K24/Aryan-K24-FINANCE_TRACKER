@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Budget Buddy Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+  <div class="dashboard">
+ <nav class="navbar">
+  <div class="logo">
+    Budget Buddy
+    <p class="tagline">Your Personal Finance Overview</p>
+  </div>
+
+  <ul class="nav-links" id="mainNav">
+    <li><a href="dashboard.html" data-page="dashboard">Dashboard</a></li>
+    <li><a href="expense.html" data-page="expenses">Expenses</a></li>
+    <li><a href="history.html" data-page="history">History</a></li>
+    <li><a href="payments.html" data-page="payments">Payments</a></li>
+    <li><a href="savings_planner.html">Savings Planner</a></li>
+    <li><a href="extra_funds.html">Extra Funds</a></li>
+
+    <li class="icon-link">
+      <a href="settings.html" data-page="settings" title="Settings">⚙️</a>
+    </li>
+    <li class="icon-link">
+      <a href="#" id="logoutBtn" title="Logout">⏻</a>
+    </li>
+  </ul>
+</nav>
+
+    <!-- Summary Cards -->
+    <section class="cards">
+
+  <div class="card">
+    <h3>Total Balance</h3>
+    <p class="amount"></p>
+  
+    <p class="extra-funds"></p>
+
+
+    <!-- NEW: Savings goal -->
+    <p class="savings-goal"></p>
+  </div>
+
+
+      <!-- UPDATED CARD -->
+      <div class="card">
+        <h3>This Month Spent</h3>
+        <p class="amount expense"></p>
+        <p class="budget-amount"></p>
+        <p class="budget-text"></p>
+
+        <div class="progress-bar">
+          <div class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Top Category</h3>
+        <p class="amount"></p>
+      </div>
+
+    </section>
+
+    <!-- Main Sections -->
+    <section class="main">
+
+    <div class="box">
+      <h2>Monthly Summary</h2>
+      <p class="monthly-summary-text"></p>
+    </div>
+
+    <div class="box">
+      <h2>Upcoming Payments</h2>
+      <div id="upcomingPayments"></div>
+    </div>
+    </section>
+    </section>
+
+  <div class="box" style="margin-top: 12px;">
+  <h2>Spending Breakdown</h2>
+  <div style="display:flex; align-items:center; justify-content:center; gap:2.5rem;">
+    <div style="width:220px; height:220px; flex-shrink:0;">
+      <canvas id="spendingChart"></canvas>
+    </div>
+    <div id="chartLegend" style="display:flex; flex-direction:column; gap:9px;"></div>
+  </div>
+</div>
+
+</div>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+  <script src="dashboard.js"></script>
+
+</body>
+</html>

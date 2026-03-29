@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Budget Buddy — Your Personal Finance Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #7c3aed;
+    --purple-light: #a78bfa;
+    --purple-dark: #5b21b6;
+    --blue: #3b82f6;
+    --blue-light: #93c5fd;
+    --bg: #f0f4ff;
+    --white: #ffffff;
+    --text: #1e1b4b;
+    --text-muted: #6b7280;
+    --card-bg: rgba(255,255,255,0.85);
+    --border: rgba(124,58,237,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2.5rem;
+    background: rgba(240,244,255,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700; font-size: 1.3rem;
+    color: var(--purple);
+    letter-spacing: -0.5px;
+  }
+
+  .nav-logo span { color: var(--blue); }
+
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--purple); }
+
+  .nav-cta {
+    background: var(--purple); color: white;
+    padding: 0.5rem 1.4rem; border-radius: 100px;
+    text-decoration: none; font-size: 0.9rem; font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--purple-dark); transform: translateY(-1px); }
+
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 7rem 1.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, rgba(59,130,246,0.06) 50%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2);
+    color: var(--purple); font-size: 0.8rem; font-weight: 600;
+    padding: 0.35rem 1rem; border-radius: 100px;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge::before { content: '✦'; font-size: 0.7rem; }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    font-weight: 700; line-height: 1.15;
+    letter-spacing: -1.5px;
+    max-width: 700px;
+    margin-bottom: 1.25rem;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem; color: var(--text-muted); line-height: 1.7;
+    max-width: 480px; margin-bottom: 2.5rem;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .hero-btns {
+    display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+
+  .btn-primary {
+    background: var(--purple); color: white;
+    padding: 0.8rem 2rem; border-radius: 100px;
+    text-decoration: none; font-weight: 600; font-size: 1rem;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(124,58,237,0.3);
+  }
+  .btn-primary:hover { background: var(--purple-dark); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(124,58,237,0.4); }
+
+  .btn-secondary {
+    background: white; color: var(--purple);
+    padding: 0.8rem 2rem; border-radius: 100px;
+    text-decoration: none; font-weight: 600; font-size: 1rem;
+    border: 1.5px solid rgba(124,58,237,0.25);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--purple); transform: translateY(-2px); }
+
+  .preview-wrap {
+    margin-top: 4rem; width: 100%; max-width: 860px;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+
+  .preview-frame {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 80px rgba(124,58,237,0.15), 0 4px 20px rgba(0,0,0,0.06);
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .frame-bar {
+    background: #f8f7ff; padding: 0.7rem 1rem;
+    display: flex; align-items: center; gap: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+
+  .frame-url {
+    margin-left: 10px; font-size: 0.75rem; color: var(--text-muted);
+    background: rgba(124,58,237,0.06); padding: 3px 12px; border-radius: 100px;
+  }
+
+  .mock-dashboard {
+    padding: 1.5rem;
+    background: linear-gradient(160deg, #f0f4ff 0%, #faf9ff 100%);
+  }
+
+  .mock-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+
+  .mock-logo { font-family: 'Sora', sans-serif; font-weight: 700; color: var(--purple); font-size: 1rem; }
+  .mock-links { display: flex; gap: 1rem; }
+  .mock-link { font-size: 0.72rem; color: var(--text-muted); }
+
+  .mock-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 0.75rem; }
+
+  .mock-card {
+    background: white; border-radius: 12px; padding: 1rem;
+    border: 1px solid var(--border);
+  }
+
+  .mock-card-label { font-size: 0.68rem; color: var(--text-muted); margin-bottom: 0.4rem; }
+  .mock-card-val { font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--text); }
+  .mock-card-val.red { color: #ef4444; }
+  .mock-card-sub { font-size: 0.65rem; color: var(--text-muted); margin-top: 0.3rem; }
+
+  .mock-progress { height: 5px; background: #fee2e2; border-radius: 100px; margin-top: 0.5rem; overflow: hidden; }
+  .mock-progress-bar { height: 100%; width: 98%; background: #ef4444; border-radius: 100px; }
+
+  .mock-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  .mock-card-wide { background: white; border-radius: 12px; padding: 1rem; border: 1px solid var(--border); }
+  .mock-card-title { font-size: 0.75rem; font-weight: 600; color: var(--text); margin-bottom: 0.6rem; }
+
+  .mock-tip { font-size: 0.65rem; color: var(--text-muted); line-height: 1.5; }
+  .mock-tip span { color: var(--text); font-weight: 600; }
+
+  .mock-payment-row { display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0; border-bottom: 1px solid #f3f4f6; }
+  .mock-payment-name { font-size: 0.7rem; color: var(--text); }
+  .mock-payment-badge { font-size: 0.6rem; background: #fee2e2; color: #ef4444; padding: 2px 8px; border-radius: 100px; font-weight: 600; }
+
+  .section { padding: 5rem 1.5rem; max-width: 1000px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.8rem; font-weight: 600; color: var(--purple);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700; letter-spacing: -0.5px;
+    line-height: 1.2; margin-bottom: 1rem;
+  }
+
+  .section-sub { color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 500px; }
+
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 3rem; }
+
+  .feature-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(124,58,237,0.1); }
+
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(59,130,246,0.12));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; margin-bottom: 1rem;
+  }
+
+  .feature-title { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem; }
+  .feature-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
+
+  .stats-section {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+    padding: 4rem 1.5rem; text-align: center;
+  }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 2rem; max-width: 700px; margin: 0 auto; }
+  .stat-num { font-family: 'Sora', sans-serif; font-size: 2.5rem; font-weight: 700; color: white; }
+  .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.75); margin-top: 0.25rem; }
+
+  .cta-section {
+    padding: 6rem 1.5rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute; bottom: -200px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(124,58,237,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-section h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700; letter-spacing: -0.5px;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p { color: var(--text-muted); margin-bottom: 2rem; font-size: 1rem; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.82rem; color: var(--text-muted);
+  }
+
+  .footer-logo { font-family: 'Sora', sans-serif; font-weight: 700; color: var(--purple); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .mock-cards { grid-template-columns: 1fr 1fr; }
+    .mock-bottom { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Budget<span>Buddy</span></div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="register.html" class="nav-cta">Get started free</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">Free for everyone · No credit card needed</div>
+  <h1>Your money,<br><em>finally under control</em></h1>
+  <p class="hero-sub">Budget Buddy helps you track expenses, plan savings, manage upcoming payments — all in one clean dashboard built for real life.</p>
+  <div class="hero-btns">
+    <a href="register.html" class="btn-primary">Start tracking for free</a>
+    <a href="login.html" class="btn-secondary">Sign in</a>
+  </div>
+
+  <div class="preview-wrap">
+    <div class="preview-frame">
+      <div class="frame-bar">
+        <div class="dot dot-r"></div>
+        <div class="dot dot-y"></div>
+        <div class="dot dot-g"></div>
+        <div class="frame-url">financialtracker-budgetbuddy.netlify.app</div>
+      </div>
+      <div class="mock-dashboard">
+        <div class="mock-nav">
+          <div class="mock-logo">Budget Buddy</div>
+          <div class="mock-links">
+            <span class="mock-link">Dashboard</span>
+            <span class="mock-link">Expenses</span>
+            <span class="mock-link">History</span>
+            <span class="mock-link">Payments</span>
+            <span class="mock-link">Savings Planner</span>
+          </div>
+        </div>
+        <div class="mock-cards">
+          <div class="mock-card">
+            <div class="mock-card-label">Total Balance</div>
+            <div class="mock-card-val">₹54</div>
+            <div class="mock-card-sub">Savings Goal: ₹2200</div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-label">This Month Spent</div>
+            <div class="mock-card-val red">₹3373</div>
+            <div class="mock-card-sub">Monthly Budget: ₹3427</div>
+            <div class="mock-progress"><div class="mock-progress-bar"></div></div>
+          </div>
+          <div class="mock-card">
+            <div class="mock-card-label">Top Category</div>
+            <div class="mock-card-val" style="font-size:1rem;margin-top:4px;">Transport</div>
+          </div>
+        </div>
+        <div class="mock-bottom">
+          <div class="mock-card-wide">
+            <div class="mock-card-title">Monthly Summary</div>
+            <div class="mock-tip">💡 This month, your highest spending was on <span>Transport</span>. Consider public transport to reduce travel costs.</div>
+          </div>
+          <div class="mock-card-wide">
+            <div class="mock-card-title">Upcoming Payments</div>
+            <div class="mock-payment-row">
+              <span class="mock-payment-name">SIP (Silver)</span>
+              <span class="mock-payment-badge">Due today</span>
+            </div>
+            <div class="mock-payment-row" style="border:none;">
+              <span class="mock-payment-name">SIP</span>
+              <span style="font-size:0.65rem;color:#6b7280;">19 days left</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="features">
+  <div class="reveal">
+    <div class="section-label">Features</div>
+    <h2 class="section-title">Everything you need to manage money smarter</h2>
+    <p class="section-sub">Built specifically for students and young earners in India who want to stay on top of every rupee.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <div class="feature-icon">📊</div>
+      <div class="feature-title">Smart Dashboard</div>
+      <div class="feature-desc">See your total balance, monthly spend, top categories, and upcoming payments at a glance — the moment you log in.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">💸</div>
+      <div class="feature-title">Expense Tracking</div>
+      <div class="feature-desc">Log expenses by category with notes. Edit or delete anytime. See exactly where your money went.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🕐</div>
+      <div class="feature-title">Expense History</div>
+      <div class="feature-desc">Filter past expenses by category or date. Full history so you never lose track of a transaction.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🔔</div>
+      <div class="feature-title">Upcoming Payments</div>
+      <div class="feature-desc">Track SIPs, subscriptions, and bills. Get notified before they're due so you're never caught off guard.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">🎯</div>
+      <div class="feature-title">Savings Planner</div>
+      <div class="feature-desc">Set a savings goal, enter your salary, and Budget Buddy tells you exactly how long it'll take to afford what you want.</div>
+    </div>
+    <div class="feature-card reveal">
+      <div class="feature-icon">➕</div>
+      <div class="feature-title">Extra Funds</div>
+      <div class="feature-desc">Got pocket money or a friend paid you back? Log extra income separately so your budget stays accurate.</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-section">
+  <div class="stats-grid">
+    <div>
+      <div class="stat-num">6</div>
+      <div class="stat-label">Powerful features</div>
+    </div>
+    <div>
+      <div class="stat-num">₹0</div>
+      <div class="stat-label">Cost to get started</div>
+    </div>
+    <div>
+      <div class="stat-num">100%</div>
+      <div class="stat-label">Built for India</div>
+    </div>
+  </div>
+</div>
+
+<section class="cta-section" id="about">
+  <div class="reveal">
+    <h2>Start tracking your money today</h2>
+    <p>Free to use. Takes 30 seconds to sign up. No credit card, no catch.</p>
+    <a href="register.html" class="btn-primary" style="font-size:1.05rem;padding:0.9rem 2.5rem;">Create your free account</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">BudgetBuddy</div>
+  <div>Built with ♥ Free for everyone</div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

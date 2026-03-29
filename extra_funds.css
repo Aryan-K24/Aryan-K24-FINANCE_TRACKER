@@ -1,0 +1,148 @@
+/* =========================
+   PAGE TITLE
+========================= */
+.page-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #1e293b;
+}
+
+/* =========================
+   FORM
+========================= */
+.extra-form {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.extra-form input {
+  flex: 1;
+  min-width: 200px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.extra-form button {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* =========================
+   LIST
+========================= */
+#extraFundsList {
+  margin-top: 10px;
+}
+
+/* Each entry wrapper */
+.extra-item {
+  margin-bottom: 16px;
+}
+
+/* MATCHES EXPENSE STYLE */
+.extra-card {
+  background: #f3f4f6;   /* slight grey */
+  padding: 20px 24px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Left section */
+.extra-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.extra-date {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.extra-note {
+  font-size: 14px;
+  color: #334155;
+}
+
+/* Right section */
+.extra-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Amount styling */
+.extra-amount {
+  font-size: 16px;
+  font-weight: 600;
+  color: #16a34a; /* green for added money */
+}
+
+/* Action buttons */
+.extra-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.extra-actions button {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* =========================
+   EDIT MODE
+========================= */
+.extra-edit {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.extra-edit input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+}
+
+.extra-edit button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.extra-edit button[data-action="save"] {
+  background: #16a34a;
+  color: white;
+}
+
+.extra-edit button[data-action="cancel"] {
+  background: #ef4444;
+  color: white;
+}
+
+/* Utility */
+.hidden {
+  display: none;
+}
+
+.empty {
+  font-size: 14px;
+  color: #64748b;
+}

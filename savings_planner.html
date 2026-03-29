@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Savings Planner | Budget Buddy</title>
+  <link rel="stylesheet" href="expense.css" /> </head>
+
+<body>
+
+  <div class="dashboard">
+    <nav class="navbar">
+      <div class="logo">
+        Budget Buddy
+        <p class="tagline">Your Personal Finance Overview</p>
+      </div>
+
+      <ul class="nav-links" id="mainNav">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="expense.html">Expenses</a></li>
+        <li><a href="history.html">History</a></li>
+        <li><a href="payments.html">Payments</a></li>
+        <li><a href="savings_planner.html">Savings Planner</a></li>
+        <li><a href="extra_funds.html">Extra Funds</a></li>
+
+
+        <li class="icon-link">
+          <a href="settings.html" title="Settings">⚙️</a>
+        </li>
+        <li class="icon-link">
+          <a href="#" id="logoutBtn" title="Logout">⏻</a>
+        </li>
+      </ul>
+    </nav>
+
+    <h2 class="page-title">Savings Planner</h2>
+    <section class="box">
+  <h3>Plan a Purchase</h3>
+  <p style="font-size: 14px; color: #64748b; margin-bottom: 15px;">Analyze your salary and savings goals to plan your next purchase.</p>
+  
+  <form class="expense-form" id="plannerForm">
+    <div class="form-group">
+      <input type="number" id="monthly-salary" placeholder="Monthly Salary (₹)" required />
+      <input type="number" id="monthly-savings" placeholder="General Savings Goal (₹)" required />
+    </div>
+
+    <div class="form-group">
+      <input type="text" id="item-name" placeholder="What do you want to buy?" required />
+      <input type="number" id="item-price" placeholder="Item Price (₹)" required />
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="save-percent" placeholder="Budget Percent to Save (%) " min="1" max="100" />
+    </div>
+
+    <div class="expense-actions" style="margin-top: 10px; gap: 10px;">
+      <button type="submit" id="calculateBtn">Calculate Plan</button>
+  </form>
+</section>
+
+ <section class="box hidden" id="resultBox">
+  <h3>Your Savings Plan</h3>
+  <div id="resultContent"></div>
+</section>
+
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+  <script src="savings_planner.js"></script>
+
+</body>
+</html>

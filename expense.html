@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Expenses | Budget Buddy</title>
+  <link rel="stylesheet" href="expense.css" />
+</head>
+
+<body>
+
+  <div class="dashboard">
+    <nav class="navbar">
+      <div class="logo">
+        Budget Buddy
+        <p class="tagline">Your Personal Finance Overview</p>
+      </div>
+
+      <ul class="nav-links" id="mainNav">
+        <li><a href="dashboard.html" data-page="dashboard">Dashboard</a></li>
+        <li><a href="expense.html" data-page="expenses">Expenses</a></li>
+        <li><a href="history.html" data-page="history">History</a></li>
+        <li><a href="payments.html" data-page="payments">Payments</a></li>
+        <li><a href="savings_planner.html">Savings Planner</a></li>
+        <li><a href="extra_funds.html">Extra Funds</a></li>
+
+        <li class="icon-link">
+          <a href="settings.html" data-page="settings" title="Settings">⚙️</a>
+        </li>
+        <li class="icon-link">
+          <a href="#" id="logoutBtn" title="Logout">⏻</a>
+        </li>
+      </ul>
+    </nav>
+
+    <h2 class="page-title">Expenses</h2>
+
+    <section class="box">
+      <h3>Add New Expense</h3>
+      <form class="expense-form">
+        <div class="form-group">
+          <input type="number" id="expense-amount" placeholder="Amount (₹)" step="0.01" required />
+          <select id="expense-category" required>
+            <option value="">Category</option>
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Entertainment</option>
+            <option>Shopping</option>
+            <option>SIP</option>
+            <option>Payback</option>
+            <option>Others</option>
+          </select>
+        </div>
+
+        <input type="text" id="expense-note" placeholder="Note (optional)" />
+        <button type="submit">Add Expense</button>
+      </form>
+    </section>
+
+    <section class="box">
+      <h3>Recent Expenses</h3>
+      <div id="recentExpenses" class="expense-list"></div>
+    </section>
+
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+  <script src="expense.js"></script>
+
+</body>
+</html>

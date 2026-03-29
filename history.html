@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>History | Budget Buddy</title>
+
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="stylesheet" href="history.css" />
+</head>
+
+<body data-page="history">
+  <div class="dashboard">
+
+    <nav class="navbar">
+      <div class="logo">
+        Budget Buddy
+        <p class="tagline">Your Personal Finance Overview</p>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="expense.html">Expenses</a></li>
+        <li><a href="history.html" class="active">History</a></li>
+        <li><a href="payments.html">Payments</a></li>
+        <li><a href="savings_planner.html">Savings Planner</a></li>
+        <li><a href="extra_funds.html">Extra Funds</a></li>
+
+        <li class="icon-link">
+          <a href="settings.html">⚙️</a>
+        </li>
+        <li class="icon-link">
+          <a href="#" id="logoutBtn">⏻</a>
+        </li>
+      </ul>
+    </nav>
+
+    <h2 class="page-title">Expense History</h2>
+
+    <!-- Filters -->
+    <section class="box history-filters">
+      <select id="categoryFilter">
+        <option value="all">All Categories</option>
+        <option>Food</option>
+        <option>Transport</option>
+        <option>Entertainment</option>
+        <option>Shopping</option>
+        <option>SIP</option>
+        <option>Payback</option>
+        <option>Others</option>
+      </select>
+
+      <input type="month" id="monthFilter" />
+    </section>
+
+    <!-- Monthly Summary -->
+    <section class="box monthly-review hidden" id="monthlyReview"></section>
+
+    <!-- History List -->
+    <section class="box">
+      <div class="history-list" id="historyList"></div>
+    </section>
+
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+  <script src="history.js"></script>
+</body>
+</html>

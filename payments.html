@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payments | Budget Buddy</title>
+
+  <!-- Shared dashboard theme -->
+  <link rel="stylesheet" href="dashboard.css" />
+  <!-- Payments-specific -->
+  <link rel="stylesheet" href="payments.css" />
+</head>
+
+<body data-page="payments">
+
+  <div class="dashboard">
+
+    <!-- ✅ SAME NAVBAR AS ALL PAGES -->
+    <nav class="navbar">
+      <div class="logo">
+        Budget Buddy
+        <p class="tagline">Your Personal Finance Overview</p>
+      </div>
+
+      <ul class="nav-links" id="mainNav">
+        <li><a href="dashboard.html" data-page="dashboard">Dashboard</a></li>
+        <li><a href="expense.html" data-page="expenses">Expenses</a></li>
+        <li><a href="history.html" data-page="history">History</a></li>
+        <li><a href="payments.html" data-page="payments">Payments</a></li>
+        <li><a href="savings_planner.html">Savings Planner</a></li>
+        <li><a href="extra_funds.html">Extra Funds</a></li>
+
+
+        <li class="icon-link">
+          <a href="settings.html" data-page="settings" title="Settings">⚙️</a>
+        </li>
+        <li class="icon-link">
+          <a href="#" id="logoutBtn" title="Logout">⏻</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- PAGE HEADER -->
+    <div class="payments-header">
+      <h2>Payments</h2>
+      <button class="add-btn" id="openModal">+ Add Payment</button>
+    </div>
+
+    <!-- PAYMENTS LIST -->
+    <section class="box">
+      <div class="payments-list" id="paymentsList">
+        <p class="empty">No upcoming payments.</p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ADD PAYMENT MODAL -->
+  <div class="modal" id="paymentModal">
+    <div class="modal-content">
+      <h3>Add Payment</h3>
+
+      <form id="paymentForm">
+        <label>
+          Title
+          <input type="text" id="paymentTitle" placeholder="e.g. Rent, Netflix" required />
+        </label>
+
+        <label>
+          Amount (₹)
+          <input type="number" id="paymentAmount" required />
+        </label>
+
+        <label>
+          Due Date
+          <input type="date" id="paymentDueDate" required />
+        </label>
+
+        <label>
+          Recurring
+          <select id="paymentRecurring">
+            <option value="monthly">Monthly</option>
+            <option value="one-time">One-time</option>
+          </select>
+        </label>
+
+        <div class="modal-actions">
+          <button type="button" class="cancel-btn" id="closeModal">Cancel</button>
+          <button type="submit" class="save-btn">Save Payment</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+  <script src="payments.js"></script>
+</body>
+</html>

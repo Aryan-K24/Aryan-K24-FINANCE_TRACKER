@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Extra Funds | Budget Buddy</title>
+  <link rel="stylesheet" href="dashboard.css" />
+  <link rel="stylesheet" href="extra_funds.css" />
+</head>
+
+<body>
+  <div class="dashboard">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        Budget Buddy
+        <p class="tagline">Your Personal Finance Overview</p>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="expense.html">Expenses</a></li>
+        <li><a href="history.html">History</a></li>
+        <li><a href="payments.html">Payments</a></li>
+        <li><a href="savings_planner.html">Savings Planner</a></li>
+        <li><a href="extra_funds.html">Extra Funds</a></li> 
+       <li class="icon-link">
+        <a href="settings.html" data-page="settings" title="Settings">⚙️</a>
+      </li>
+     <li class="icon-link">
+        <a href="#" id="logoutBtn" title="Logout">⏻</a>
+      </li>
+      </ul>
+    </nav>
+
+    <!-- Title -->
+    <h2 class="page-title">Extra Funds</h2>
+
+    <!-- Add Form -->
+    <section class="box">
+      <form class="extra-form">
+        <input
+          type="number"
+          id="extra-amount"
+          placeholder="Amount (₹)"
+          required
+        />
+        <input
+          type="text"
+          id="extra-note"
+          placeholder="Note (optional)"
+        />
+        <button type="submit">Add Funds</button>
+      </form>
+    </section>
+
+    <!-- List -->
+    <section class="box">
+      <h2>Recent Extra Funds</h2>
+      <div id="extraFundsList"></div>
+    </section>
+
+  </div>
+
+  <script src="auth.js"></script>
+  <script src="app.js"></script>
+  <script src="extra_funds.js"></script>
+</body>
+</html>

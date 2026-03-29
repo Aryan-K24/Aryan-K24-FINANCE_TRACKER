@@ -1,0 +1,77 @@
+:root {
+    --primary-purple: #800080;
+    --primary-blue: #2563eb;
+    --bg-light: #f4f7fa;
+    --text-dark: #1e293b;
+    --text-gray: #64748b;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: var(--bg-light);
+    margin: 0;
+}
+
+.container { padding: 20px 8%; }
+
+/* Universal Card Theme */
+.universal-card {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.section-title { font-size: 1.8rem; margin: 0; color: var(--text-dark); }
+.section-desc { color: var(--text-gray); margin-bottom: 30px; font-size: 0.95rem; }
+
+.form-group { margin-bottom: 20px; }
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--text-dark);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.button-row { display: flex; gap: 12px; margin-top: 10px; }
+
+.btn-primary {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background-color: #f1f5f9;
+    color: var(--text-gray);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.result-box {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8fafc;
+    border-left: 5px solid var(--primary-blue);
+    border-radius: 8px;
+    line-height: 1.6;
+}
+
+.hidden { display: none; }

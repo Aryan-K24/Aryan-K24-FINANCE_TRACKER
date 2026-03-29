@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Settings | Budget Buddy</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+  <nav class="navbar">
+    <div class="logo">
+      Budget Buddy
+      <p class="tagline">Your Personal Finance Overview</p>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="expense.html">Expenses</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="payments.html">Payments</a></li>
+      <li><a href="savings_planner.html">Savings Planner</a></li>
+      <li><a href="extra_funds.html">Extra Funds</a></li>
+
+
+      <li class="icon-link">
+        <a class="active">⚙️</a>
+      <li class="icon-link">
+      <a href="#" id="logoutBtn" title="Logout">⏻</a>
+    </li>
+      </li>
+    </ul>
+  </nav>
+
+  <section class="settings-page">
+    <div class="settings-card">
+      <h2>Financial Settings</h2>
+
+      <form class="settings-form">
+        <div class="field">
+          <label>Monthly Salary</label>
+          <input type="number" placeholder="50000" />
+        </div>
+
+        <div class="field">
+          <label>Monthly Savings Target</label>
+          <input type="number" placeholder="10000" />
+        </div>
+
+        <button class="save-btn" type="submit">
+          Save Changes
+        </button>
+      </form>
+    </div>
+  </section>
+
+</div>
+
+<!-- 🔴 ORDER MATTERS -->
+<script src="auth.js"></script>
+<script src="app.js"></script>
+<script src="settings.js"></script>
+
+</body>
+</html>
